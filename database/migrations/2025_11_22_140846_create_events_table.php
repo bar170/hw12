@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->dateTime('start_at')->index();
             $table->unsignedBigInteger('driver_id');
             $table->unsignedBigInteger('transport_id');
             $table->unsignedBigInteger('route_id');
