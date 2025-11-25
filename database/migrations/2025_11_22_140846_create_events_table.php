@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->foreign('driver_id')
                 ->references('id')
-                ->on('drivers')
+                ->on('members')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

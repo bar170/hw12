@@ -13,15 +13,31 @@ return new class extends Migration
     {
         Schema::create('rewiews', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger(column: 'user_id');
+            $table->unsignedBigInteger(column: 'event_id');
+            $table->unsignedBigInteger(column: 'type_id');
+            $table->unsignedBigInteger(column: 'target_id');
             $table->integer('rate');
             $table->text('comment')->nullable();
-            $table->unsignedBigInteger(column: 'passenger_id');
             $table->timestamps();
 
 
-            $table->foreign('passenger_id')
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('passengers')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            
+            $table->foreign('event_id')
+                ->references('id')
+                ->on('events')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
