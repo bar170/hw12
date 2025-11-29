@@ -13,3 +13,12 @@ Route::get('/about', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/test', function () {
+    $data = \App\Models\User::all();
+    //$data = config('seed.companies_count');
+
+    dump($data);
+
+    return '';
+});
