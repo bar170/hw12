@@ -3,10 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Company;
-use App\Models\Member;
 use App\Models\User;
 use App\Models\Role;
-use Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

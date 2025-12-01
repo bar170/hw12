@@ -12,8 +12,8 @@ $rolesCount = 5;
 $roleOwner = 'owner';
 $roleDriver = 'driver';
 $rolesMustBe = [
-    ['name' => $roleOwner, 'description' => 'Владелец', 'rights' => 10],
-    ['name' => $roleDriver, 'description' => 'Водитель', 'rights' => 5],
+    $roleOwner => ['id' => 1, 'name' => $roleOwner, 'description' => 'Владелец', 'rights' => 10],
+    $roleDriver => ['id' => 2, 'name' => $roleDriver, 'description' => 'Водитель', 'rights' => 5],
 ];
 
 /**
@@ -31,15 +31,37 @@ $companiesSmallCount = ceil($companiesCount * $componiesShareSmall);
 $companoesMediumCount = ceil($companiesCount * $componiesShareMedium);
 $companiesCount = $companiesSmallCount + $companoesMediumCount;
 
-
+/**
+ * Типы отзывов
+ */
+$reviewTypes = [
+    [
+        'name' => 'событие',
+        'description' => 'Отзыв на поездку',
+        'entity' => 'event'
+    ],
+    [
+        'name' => 'водитель',
+        'description' => 'Отзыв на водителя',
+        'entity' => 'driver'
+    ],
+    [
+        'name' => 'пассажир',
+        'description' => 'Отзыв на пассажира',
+        'entity' => 'passenger'
+    ],
+];
 
 return [
     'users_count' => $usersCount,
     'roles_count' => $rolesCount,
+    'role_driver' => $roleDriver,
+    'role_owner' => $roleOwner,
     'roles_must_be' => $rolesMustBe,
     'companies_count' => $companiesCount,
     'companies_small_count' => $companiesSmallCount,
     'companies_medium_count' => $companoesMediumCount,
+    'review_types' => $reviewTypes,
 ];
 
 ?>

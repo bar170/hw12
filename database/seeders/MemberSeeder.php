@@ -61,8 +61,8 @@ class MemberSeeder extends Seeder
         $res = [];
 
         foreach($roles as $role) {
-        $name = $role['name'];
-        $res[$name] = Role::where('name', $name)->first();
+            $name = $role['name'];
+            $res[$name] = Role::where('name', $name)->first();
         }
         
         return $res;
