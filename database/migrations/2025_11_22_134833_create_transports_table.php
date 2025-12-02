@@ -18,7 +18,14 @@ return new class extends Migration
             $table->string('mark');
             $table->string('color');
             $table->integer('seats'); // Количество пассажирских мест
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
+                        
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

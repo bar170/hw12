@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Transport;
-use App\Repositories\MemberRepository;
+use App\Repositories\CompanyRepository;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,11 +14,17 @@ class TransportSeeder extends Seeder
      */
     public function run(): void
     {
-        $member = new MemberRepository();
-        // Создадим по 1 автомобилю для каждого водителя
-        $drivers = $member->getDrivers();
-        foreach ($drivers as $driver) {
-            Transport::factory()->create();
+        $companyRepo = new CompanyRepository();
+        // Создадим по 1 автомобилю для каждой маленькой компании
+        $companiesSmall = $companyRepo->getSmallCompanies();
+        foreach ($companiesSmall as $company) {
+            Transport::factory()->create(['company_id' => $company->id]);
+        }
+        // Создадим по несколько автомобилей для крупных компаний
+        $companiesBig = $companyRepo->getBigCompanies();
+        foreach ($companiesBig as $company) {
+            $transportCount = rand(2, 5);
+            Transport::factory()->count($transportCount)->create(['company_id' => $company->id]);
         }
     }
 }

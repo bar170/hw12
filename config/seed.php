@@ -52,6 +52,14 @@ $reviewTypes = [
     ],
 ];
 
+/**
+ * Маршруты
+ */
+// Количество остановок в маршрутах 
+$breakpointsCount = 33;
+// Стоимость одного км в рублях
+$costOneKm = 1;
+
 return [
     'users_count' => $usersCount,
     'roles_count' => $rolesCount,
@@ -62,6 +70,8 @@ return [
     'companies_small_count' => $companiesSmallCount,
     'companies_medium_count' => $companoesMediumCount,
     'review_types' => $reviewTypes,
+    'breakpoints_count' => $breakpointsCount,
+    'cost_one_km' => $costOneKm,
 ];
 
 ?>

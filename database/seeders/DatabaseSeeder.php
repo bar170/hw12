@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeSeeder::class);
         $this->call(TransportSeeder::class);
         $this->call(RouteSeeder::class);
+        $this->call(BreakpointSeeder::class);
+        $this->call(SegmentSeeder::class);
+        $this->call(EventSeeder::class);
     }
 }

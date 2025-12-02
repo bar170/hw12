@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,11 +18,12 @@ class TransportFactory extends Factory
     public function definition(): array
     {
         return [
-            'number' => $this->faker->randomLetter() . $this->faker->randomLetter() . rand(100, 999) . $this->faker->randomLetter(),
-            'mark' => $this->faker->text(10),            
-            'model' => $this->faker->text(10),
+            'number' => $this->faker->bothify('?###??'),
+            'mark' => $this->faker->word(),            
+            'model' => $this->faker->words(2, true),
             'color' => $this->faker->colorName,
             'seats' => $this->faker->randomElement([4, 9, 25]),
+            'company_id' => Company::inRandomOrder()->firstOrFail()->id,
         ];
     }
 }

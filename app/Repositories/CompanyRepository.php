@@ -9,7 +9,7 @@ class CompanyRepository
 {
 
     /**
-     * Получить водителей компании (или всех, если не указана id компании)
+     * Получить водителей компании
      */
     public function getDrivers(int $companyId): Collection
     {
