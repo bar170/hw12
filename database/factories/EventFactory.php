@@ -37,10 +37,10 @@ class EventFactory extends Factory
         $route = $company->routes()->inRandomOrder()->firstOrFail();
 
         return [
-            'start_at'    => $this->faker->dateTimeBetween('now', '+1 month'),
-            'driver_id'   => $driver->id,
+            'start_at' => $this->faker->dateTimeBetween('now', '+1 month'),
+            'driver_id' => $driver->id,
             'transport_id'=> $transport->id,
-            'route_id'    => $route->id,
+            'route_id' => $route->id,
         ];
     }
 }

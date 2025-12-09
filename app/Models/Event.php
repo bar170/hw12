@@ -19,6 +19,12 @@ class Event extends Model
         'driver_id',
     ];
 
+    public function states(): HasMany
+    {
+        return $this->hasMany(EventState::class);
+    }
+
+
     public function passengers(): HasMany
     {
         return $this->hasMany(Passenger::class);

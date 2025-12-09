@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BreakpointSeeder::class);
         $this->call(SegmentSeeder::class);
         $this->call(EventSeeder::class);
+        $this->call(PassengerSeeder::class);
     }
 }

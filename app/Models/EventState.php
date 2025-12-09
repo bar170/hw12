@@ -14,7 +14,7 @@ class EventState extends Model
         'state_id',
     ];
 
-    public function events(): BelongsTo
+    public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class);
     }

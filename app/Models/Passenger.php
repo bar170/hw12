@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Passenger extends Model
 {
+    use HasFactory;
+
     protected $table = 'passengers';
 
     protected $fillable = [
@@ -15,9 +18,9 @@ class Passenger extends Model
         'event_id',
     ];
 
-    public function stateLogs(): HasMany
+    public function states(): HasMany
     {
-        return $this->hasMany(StateLogs::class);
+        return $this->hasMany(PassengerState::class);
     }
 
     public function user(): BelongsTo
