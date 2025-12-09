@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class StateLog extends Model
+class EventState extends Model
 {
-    protected $table = 'state_logs';
+    protected $table = 'event_state';
 
     protected $fillable = [
-        'passenger_id',
+        'event_id',
         'state_id',
     ];
 
-    public function passenger(): BelongsTo
+    public function events(): BelongsTo
     {
-        return $this->belongsTo(Passenger::class);
+        return $this->belongsTo(Event::class);
     }
 
     public function state(): BelongsTo
