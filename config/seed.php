@@ -66,6 +66,72 @@ $breakpointsCount = 33;
 // Стоимость одного км в рублях
 $costOneKm = 1;
 
+/**
+ * Состояния
+ */
+$stateSuccess = 'success';
+$stateFail = 'fail';
+$stateDuring = 'during';
+$stateCancel = 'cancel';
+$stateWait = 'wait';
+$stateBooked = 'booked';
+$stateChecked = 'checked';
+$states = [
+    $stateSuccess => [
+        'name' => $stateSuccess,
+        'description' => 'Успешное завершение',
+        'order' => 200,
+    ],
+    $stateFail => [
+        'name' => $stateFail,
+        'description' => 'Не успешное завершение. По своей вине',
+        'order' => 500,
+    ],
+    $stateDuring => [
+        'name' => $stateDuring,
+        'description' => 'В процессе выполнения',
+        'order' => 170,
+    ],
+    $stateCancel => [
+        'name' => $stateCancel,
+        'description' => 'Отмена',
+        'order' => 90,
+    ],
+    $stateWait => [
+        'name' => $stateWait,
+        'description' => 'В состоянии ожидания',
+        'order' => 10,
+    ],
+    $stateBooked => [
+        'name' => $stateBooked,
+        'description' => 'Забронировано участие в событии',
+        'order' => 50,
+    ],
+    $stateChecked => [
+        'name' => $stateChecked,
+        'description' => 'Пройдена регистрация на событие (явился на него и ожидание начала события)',
+        'order' => 100,
+    ],
+];
+
+$statesEvent = [
+    $states[$stateWait], 
+    $states[$stateCancel], 
+    $states[$stateDuring], 
+    $states[$stateSuccess], 
+    $states[$stateFail]
+];
+
+$statesPassengers = [
+    $states[$stateWait], 
+    $states[$stateBooked], 
+    $states[$stateCancel], 
+    $states[$stateChecked], 
+    $states[$stateDuring],
+    $states[$stateSuccess],
+    $states[$stateFail],
+];
+
 return [
     'users_count' => $usersCount,
     'roles_count' => $rolesCount,
@@ -81,6 +147,9 @@ return [
     'review_types' => $reviewTypes,
     'breakpoints_count' => $breakpointsCount,
     'cost_one_km' => $costOneKm,
+    'states' => $states,
+    'states_event' => $statesEvent,
+    'states_passengers' => $statesPassengers,
 ];
 
 ?>
