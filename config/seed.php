@@ -34,28 +34,34 @@ $companiesCount = $companiesSmallCount + $companoesMediumCount;
 /**
  * Типы отзывов
  */
+$entityEvent = 'event';
+$entityDriver = 'driver';
+$entityPassenger = 'passenger';
 $reviewTypes = [
-    [
+    $entityEvent => [
         'name' => 'событие',
         'description' => 'Отзыв на поездку',
-        'entity' => 'event'
+        'entity' => $entityEvent,
+        'model' => 'App\models\Event'
     ],
-    [
+    $entityDriver => [
         'name' => 'водитель',
         'description' => 'Отзыв на водителя',
-        'entity' => 'driver'
+        'entity' => $entityDriver,
+        'model' => 'App\models\Driver'
     ],
-    [
+    $entityPassenger => [
         'name' => 'пассажир',
         'description' => 'Отзыв на пассажира',
-        'entity' => 'passenger'
+        'entity' => $entityPassenger,
+        'model' => 'App\models\Passenger'
     ],
 ];
 
 /**
  * Маршруты
  */
-// Количество остановок в маршрутах 
+// Количество существующих остановок в маршрутах 
 $breakpointsCount = 33;
 // Стоимость одного км в рублях
 $costOneKm = 1;
@@ -69,6 +75,9 @@ return [
     'companies_count' => $companiesCount,
     'companies_small_count' => $companiesSmallCount,
     'companies_medium_count' => $companoesMediumCount,
+    'entity_event' => $entityEvent,
+    'entity_driver' => $entityDriver,
+    'entity_passenger' => $entityPassenger,
     'review_types' => $reviewTypes,
     'breakpoints_count' => $breakpointsCount,
     'cost_one_km' => $costOneKm,

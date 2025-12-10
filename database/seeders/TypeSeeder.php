@@ -15,7 +15,11 @@ class TypeSeeder extends Seeder
     {
         $types = config('seed.review_types');
         foreach ($types as $type) {
-            Type::create($type);
+            Type::create([
+                'name' => $type['name'],
+                'description' => $type['description'],
+                'entity' => $type['entity'],
+            ]);
         }
     }
 }

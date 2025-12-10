@@ -4,15 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Review extends Model
 {
+    use HasFactory;
+    
     protected $table = 'reviews';
 
     protected $fillable = [
         'rate',
         'comment',
-        'type_id',
         'type_id',
         'event_id',
         'user_id',
