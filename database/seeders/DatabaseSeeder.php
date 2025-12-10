@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Passenger;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -29,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReviewSeeder::class);
         $this->call(StateSeeder::class);
         $this->call(EventStateSeeder::class);
+        $this->call(PassengerStateSeeder::class);
     }
 }

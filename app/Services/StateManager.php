@@ -3,15 +3,16 @@ namespace App\Services;
 
 use Carbon\Carbon;
 use App\Models\Event;
+use App\Models\Passenger;
 use App\Models\State;
 
 class StateManager
 {
-    private Event $event;
+    private Event | Passenger $entity;
 
-    public function __construct(Event $event)
+    public function __construct(Event | Passenger $entity)
     {
-        $this->event = $event;
+        $this->entity = $entity;
     }
 
     public function success(?\Carbon\Carbon $time = null): void
@@ -47,7 +48,7 @@ class StateManager
     {
         $state = State::where('name', $stateName)->firstOrFail();
 
-        $this->event->states()->create([
+        $this->entity->states()->create([
             'state_id'   => $state->id,
             'created_at' => $time ?? now(),
             'updated_at' => $time ?? now(),
