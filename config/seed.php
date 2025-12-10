@@ -150,6 +150,13 @@ return [
     'states' => $states,
     'states_event' => $statesEvent,
     'states_passengers' => $statesPassengers,
+    'state_success' => $stateSuccess,
+    'state_fail' => $stateFail,
+    'state_during' => $stateDuring,
+    'state_cancel' => $stateCancel,
+    'state_wait' => $stateWait,
+    'state_booked' => $stateBooked,
+    'state_checked' => $stateChecked,
 ];
 
 ?>

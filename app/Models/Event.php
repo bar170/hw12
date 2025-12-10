@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Services\StateManager;
 
 class Event extends Model
 {
@@ -48,5 +49,10 @@ class Event extends Model
     public function transport(): BelongsTo
     {
         return $this->belongsTo(Transport::class);
+    }
+
+    public function state(): StateManager
+    {
+        return new StateManager($this);
     }
 }
