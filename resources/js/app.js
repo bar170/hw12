@@ -1,2 +1,4 @@
 import './bootstrap';
-import './admin/sb-admin-2.js';
+
+import './admin/sidebar-toggle.js';
+import './admin/scroll-top.js';
