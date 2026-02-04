@@ -14,7 +14,7 @@ class CompanyController extends Controller
     public function index(CompanyService $companyService)
     {
         $companies = $companyService->getRecentCompanies();
-        return view('companies.index', compact('companies'));
+        return view('admin.companies.index', compact('companies'));
     }
 
     /**

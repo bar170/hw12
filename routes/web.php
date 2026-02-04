@@ -15,11 +15,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('companies', CompanyController::class);
+Route::prefix('admin')->name('admin.')->group(function () {
 
-
-Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
-    })->name('admin.dashboard');
+    })->name('dashboard');
+
+    Route::resource('companies', CompanyController::class);
 });
+
