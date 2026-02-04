@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CompanyRepository
 {
-
     /**
      * Получить водителей компании
      */
@@ -56,7 +55,14 @@ class CompanyRepository
             ->get();
     }
 
+    public function getRecentCompanies(int $count): \Illuminate\Database\Eloquent\Collection
+    {
+        return Company::orderByDesc("created_at")->take($count)->get();
+    }
 
+    public function getCompany(int $companyId): Company
+    {
+        return Company::findOrFail($companyId);
+    }
 }
-
 ?>
