@@ -17,19 +17,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('companies', CompanyController::class);
 
-Route::get('/test', function () {
-    $data = \App\Models\User::all();
-    $start = \App\Models\Breakpoint::inRandomOrder()->first();
-    $end = \App\Models\Breakpoint::inRandomOrder()->first();
-    $distance = \App\Services\GeoService::distance($start, $end);
-    //$data = config('seed.companies_count');
-
-    dump($start);
-    dump($end);
-    dump($distance);
-
-    return '';
-});
 
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
