@@ -30,3 +30,9 @@ Route::get('/test', function () {
 
     return '';
 });
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});

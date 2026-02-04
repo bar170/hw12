@@ -1,1 +1,2 @@
 import './bootstrap';
+import './admin/sb-admin-2.js';
