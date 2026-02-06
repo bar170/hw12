@@ -35,7 +35,12 @@
                                    class="btn btn-sm btn-primary">
                                     Подробнее
                                 </a>
+                                <a href="{{ route('admin.companies.edit', $company->id) }}"
+                                   class="btn btn-sm btn-warning">
+                                    Редактировать
+                                </a>
                             </div>
+
 
                         </div>
                     </div>

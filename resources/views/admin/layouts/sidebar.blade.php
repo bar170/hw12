@@ -59,7 +59,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Компании:</h6>
                 <a class="collapse-item" href="{{ route('admin.companies.index') }}">Список</a>
-                <a class="collapse-item" href="#">Добавить</a>
+                <a class="collapse-item" href="{{ route('admin.companies.create') }}">Добавить</a>
             </div>
         </div>
     </li>

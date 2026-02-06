@@ -1,9 +1,12 @@
 <?php
 namespace App\Repositories;
 
+use App\DDD\DTO\CompanyDTO;
+use App\DDD\VO\Company\DescriptionVO;
+use App\DDD\VO\Company\NameVO;
 use App\Models\Company;
-use App\Models\Member;
 use Illuminate\Database\Eloquent\Collection;
+use App\DDD\VO\Company\IdVO;
 
 class CompanyRepository
 {
@@ -44,7 +47,7 @@ class CompanyRepository
     }
 
     /**
-     * Получить все маленькие компании (где только один пользователь и он же является владельцем и водителем) 
+     * Получить все маленькие компании (где только один пользователь и он же является владельцем и водителем)
      */
     public function getSmallCompanies(): Collection
     {
@@ -60,9 +63,45 @@ class CompanyRepository
         return Company::orderByDesc("created_at")->take($count)->get();
     }
 
-    public function getCompany(int $companyId): Company
+    public function getCompany(IdVO $companyId): Company
     {
-        return Company::findOrFail($companyId);
+        return Company::findOrFail($companyId->value());
+    }
+
+    public function updateCompany(CompanyDTO $companyDto): Company | false
+    {
+        $result = false;
+
+        $company = Company::find($companyDto->companyId->value());
+        if ($company) {
+            $company->name = $companyDto->name;
+            $company->description = $companyDto->description;
+            $company->save();
+            $result = $company;
+        }
+
+        return $result;
+    }
+
+    public function destroyCompany(IdVO $companyId): bool
+    {
+        $result = false;
+
+        $company = Company::find($companyId->value());
+        if ($company) {
+            $result = $company->delete();
+        }
+
+        return $result;
+    }
+
+    public function createCompany(NameVO $name, DescriptionVO $description): Company
+    {
+        $company = Company::create([
+            'name' => $name,
+            'description' => $description,
+        ]);
+
+        return $company;
     }
 }
-?>
