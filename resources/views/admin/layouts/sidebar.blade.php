@@ -2,10 +2,11 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+            <img src="{{ Vite::asset('resources/images/logo.jpg') }}"
+                 alt="Arbusik Logo" width="30" height="30" class="me-2 rounded-circle">
         </div>
-        <div class="sidebar-brand-text mx-3">Arbusik</div>
+        <div class="sidebar-brand-text mx-3">Arbusik.ru</div>
     </a>
 
     <hr class="sidebar-divider my-0">

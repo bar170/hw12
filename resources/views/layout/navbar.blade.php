@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-            <img src="https://ih1.redbubble.net/image.5508025208.4757/st,small,507x507-pad,600x600,f8f8f8.jpg" 
+            <img src="{{ Vite::asset('resources/images/logo.jpg') }}"
                  alt="Arbusik Logo" width="30" height="30" class="me-2 rounded-circle">
             Arbusik.ru
         </a>
