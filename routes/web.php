@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,16 +15,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/test', function () {
-    $data = \App\Models\User::all();
-    $start = \App\Models\Breakpoint::inRandomOrder()->first();
-    $end = \App\Models\Breakpoint::inRandomOrder()->first();
-    $distance = \App\Services\GeoService::distance($start, $end);
-    //$data = config('seed.companies_count');
+Route::prefix('admin')->name('admin.')->group(function () {
 
-    dump($start);
-    dump($end);
-    dump($distance);
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
 
-    return '';
+    Route::resource('companies', CompanyController::class);
 });
+
