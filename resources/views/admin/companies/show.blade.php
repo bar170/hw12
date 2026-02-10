@@ -31,21 +31,13 @@
                 @endif
 
                 <div class="d-flex flex-wrap gap-2 mt-4">
-                    <a href="{{ route('admin.companies.index') }}" class="btn btn-outline-secondary">
-                        ← Назад к списку
+                    <a href="{{ route('admin.companies.index') }}" class="btn btn-light">
+                        Назад к списку
                     </a>
 
                     <a href="{{ route('admin.companies.edit', $company) }}" class="btn btn-warning">
                         Режим редактирования
                     </a>
-
-                    <form action="{{ route('admin.companies.destroy', $company) }}" method="POST" onsubmit="return confirm('Удалить компанию?')" class="m-0">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
-                            Удалить
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
