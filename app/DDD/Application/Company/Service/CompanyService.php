@@ -22,7 +22,7 @@ class CompanyService implements CompanyServiceInterface
 
     public function getCompany(IdVO $companyId): Company
     {
-        return $this->companyRepo->getCompany($companyId);
+        return $this->companyRepo->getCompanyById($companyId);
     }
 
     public function updateCompany(CompanyDTO $dto): Company
@@ -32,7 +32,7 @@ class CompanyService implements CompanyServiceInterface
 
     public function destroyCompany(IdVO $companyId): bool
     {
-        return $this->companyRepo->destroyCompany($companyId);
+        $this->companyRepo->destroyCompany($companyId);
     }
 
     public function createCompany(CompanyCreateDTO $dto): Company
