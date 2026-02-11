@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\DDD\Domain\Company\Service\CompanyRules;
 use App\DDD\Infrastructure\Repository\CompanyRepo;
 use App\Models\Transport;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,13 +16,14 @@ class TransportSeeder extends Seeder
     public function run(): void
     {
         $companyRepo = new CompanyRepo();
+        $count = CompanyRules::BIG_COMPANY_MIN_EMPLOYEES;
         // Создадим по 1 автомобилю для каждой маленькой компании
-        $companiesSmall = $companyRepo->getSmallCompanies();
+        $companiesSmall = $companyRepo->getCompaniesLessMember($count - 1);
         foreach ($companiesSmall as $company) {
             Transport::factory()->create(['company_id' => $company->id]);
         }
         // Создадим по несколько автомобилей для крупных компаний
-        $companiesBig = $companyRepo->getBigCompanies();
+        $companiesBig = $companyRepo->getCompaniesMoreMember($count);
         foreach ($companiesBig as $company) {
             $transportCount = rand(2, 5);
             Transport::factory()->count($transportCount)->create(['company_id' => $company->id]);

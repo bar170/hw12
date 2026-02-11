@@ -39,6 +39,4 @@ class CompanyService implements CompanyServiceInterface
     {
         return $this->companyRepo->createCompany($dto);
     }
-
-
 }

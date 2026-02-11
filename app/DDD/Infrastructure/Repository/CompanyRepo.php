@@ -58,29 +58,37 @@ class CompanyRepo implements CompanyRepoInterface
         return Company::orderByDesc("created_at")->take($count)->get();
     }
 
+
     /**
-     * Получить компании, где число сотрудников больше 2
+     * Получить компании, количество сотрудников в которых больше $count
+     *
+     * @param int $count
+     * @return Collection
      */
-    public function getBigCompanies(): Collection
+    public function getCompaniesMoreMember(int $count): Collection
     {
         return Company::select('companies.*')
             ->join('members', 'companies.id', '=', 'members.company_id')
             ->groupBy('companies.id')
-            ->havingRaw('COUNT(DISTINCT members.user_id) > 1')
+            ->havingRaw('COUNT(DISTINCT members.user_id) > ' . $count)
             ->get();
     }
 
     /**
-     * Получить все маленькие компании (где только один пользователь и он же является владельцем и водителем)
+     * Получить компании количество сотрудников в которых меньше или равно $count
+     *
+     * @param int $count
+     * @return Collection
      */
-    public function getSmallCompanies(): Collection
+    public function getCompaniesLessMember(int $count): Collection
     {
         return Company::select('companies.*')
             ->join('members', 'companies.id', '=', 'members.company_id')
             ->groupBy('companies.id')
-            ->havingRaw('COUNT(DISTINCT members.user_id) = 1')
+            ->havingRaw('COUNT(DISTINCT members.user_id) <=' . $count)
             ->get();
     }
+
 
     /**
      * Получить водителей компании
