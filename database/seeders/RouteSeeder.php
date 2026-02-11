@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Repositories\CompanyRepository;
+
+use App\DDD\Infrastructure\Repository\CompanyRepo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Route;
@@ -14,7 +15,7 @@ class RouteSeeder extends Seeder
      */
     public function run(): void
     {
-        $companyRepo = new CompanyRepository();
+        $companyRepo = new CompanyRepo();
         // У маленьких компаний будет по одному маршруту
         foreach ($companyRepo->getSmallCompanies() as $company) {
             Route::factory()->create([

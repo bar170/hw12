@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\DDD\Infrastructure\Repository\CompanyRepo;
 use App\Models\Transport;
-use App\Repositories\CompanyRepository;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +14,7 @@ class TransportSeeder extends Seeder
      */
     public function run(): void
     {
-        $companyRepo = new CompanyRepository();
+        $companyRepo = new CompanyRepo();
         // Создадим по 1 автомобилю для каждой маленькой компании
         $companiesSmall = $companyRepo->getSmallCompanies();
         foreach ($companiesSmall as $company) {
