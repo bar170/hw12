@@ -34,3 +34,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('companies', CompanyController::class);
 });
+
+Route::get('/test-flowbite', function () {
+    return view('test-flowbite');
+})->name('test.flowbite');
+
+Route::get('/test-simple', function () {
+    return view('test-simple');
+});

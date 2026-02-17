@@ -1,71 +1,99 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-            <img src="{{ Vite::asset('resources/images/logo.jpg') }}"
-                 alt="Arbusik Logo" width="30" height="30" class="me-2 rounded-circle">
-            Arbusik.ru
-        </a>
+<nav class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <!-- Левая часть с логотипом -->
+            <div class="flex items-center">
+                <a href="{{ url('/') }}" class="flex items-center space-x-2">
+                    <img src="{{ Vite::asset('resources/images/logo.jpg') }}"
+                         alt="Arbusik Logo"
+                         class="w-8 h-8 rounded-full">
+                    <span class="font-semibold text-xl text-gray-800">Arbusik.ru</span>
+                </a>
+            </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <!-- Мобильное меню кнопка -->
+            <div class="flex md:hidden">
+                <button type="button"
+                        class="text-gray-500 hover:text-gray-600 focus:outline-none"
+                        onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto">
+            <!-- Десктопное меню -->
+            <div class="hidden md:flex md:items-center md:space-x-6">
+                <!-- Левая часть навигации для авторизованных -->
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Найти попутчика</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Стать водителем</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route(name: 'about') }}">О нас</a>
-                    </li>
+                    <a href="/" class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Найти попутчика</a>
+                    <a href="/" class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Стать водителем</a>
+                    <a href="{{ route('about') }}" class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">О нас</a>
                 @endauth
-            </ul>
 
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
+                <!-- Правая часть навигации -->
+                <div class="flex items-center space-x-4">
+                    @guest
+                        @if (Route::has('login'))
+                            <a href="{{ route('login') }}" class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Вход</a>
+                        @endif
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Регистрация</a>
+                        @endif
+                    @else
+                        <!-- Выпадающее меню профиля -->
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open"
+                                    class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium focus:outline-none">
+                                <span>{{ Auth::user()->name }}</span>
+                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                            <div x-show="open"
+                                 @click.away="open = false"
+                                 class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                                <a href="{{ route('home') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Моя страница</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        Выйти
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @endguest
+                </div>
+            </div>
+        </div>
+
+        <!-- Мобильное меню (скрыто по умолчанию) -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="pt-2 pb-3 space-y-1">
+                @auth
+                    <a href="/" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Найти попутчика</a>
+                    <a href="/" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Стать водителем</a>
+                    <a href="{{ route('about') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">О нас</a>
+                @endauth
+
                 @guest
                     @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
+                        <a href="{{ route('login') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Вход</a>
                     @endif
-
                     @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
+                        <a href="{{ route('register') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Регистрация</a>
                     @endif
                 @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('home') }}">
-                                Моя страница
-                            </a>
-
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
+                    <div class="px-3 py-2 text-base font-medium text-gray-700">{{ Auth::user()->name }}</div>
+                    <a href="{{ route('home') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Моя страница</a>
+                    <form method="POST" action="{{ route('logout') }}" class="px-3 py-2">
+                        @csrf
+                        <button type="submit" class="text-base font-medium text-gray-700 hover:text-gray-900">
+                            Выйти
+                        </button>
+                    </form>
                 @endguest
-            </ul>
+            </div>
         </div>
     </div>
 </nav>
